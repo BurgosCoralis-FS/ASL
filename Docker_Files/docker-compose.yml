@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    restart: always
+    networks:
+      - asl
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+  node:
+    image: node:18
+    user: root
+    working_dir: /home/root/app
+    networks:
+      - asl
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./:/home/root/app
+    ports:
+      - "3000:3000"
+    restart: always
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mariadb
+
+networks:
+  asl:
+
