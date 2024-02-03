@@ -1,0 +1,52 @@
+{% extends "layouts/_default.twig" %}
+
+{% block pageName %}View all galaxies{% endblock %}
+
+{% block main_content %}
+    <div class='bg'>
+        <div class='content'>
+            {% for galaxy in galaxies %}
+                <div class='column'>
+                    <div class='top'>
+                        <a href="/galaxies/{{ galaxy.id }}">
+                            <img src='/images/pngwing.com.png' alt="galaxy">
+                        </a>
+                    </div>
+
+                    <div class='middle'>
+                        <h1>
+                            <a href="/galaxies{{ galaxy.id }}">{{ galaxy.name }}</a>
+                        </h1>
+                    </div>
+
+                    <div class='bottom'>
+                        <p>{{ galaxy.size }}</p>
+                        <p> {{ galaxy.description }}</p>
+                        <ul>
+                            <li>
+                                <a href="/galaxies/{{ galaxy.id }}">Show</a> 
+                                <a href="/galaxies/{{ galaxy.id }}/edit">Edit</a>             
+                                <a href="/galaxies/{{ galaxy.id }}/delete">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class='column'>
+                <div class='top'>
+                    <a href="/galaxies/new">
+                        <img src='/images/pngwing.com.png' alt="galaxy">
+                    </a>
+                </div>
+
+                <div class='middle'>
+                    <h1>
+                        <a href="/galaxies/new">Create A New Galaxy</a>
+                    </h1>
+                </div>
+
+                <div class='bottom'></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

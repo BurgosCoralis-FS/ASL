@@ -1,48 +1,56 @@
-const { Galaxy, Star } = require("../src/models")
+const { Galaxy, Star } = require("../models")
 
 const index = async (req, res) => {
   const galaxies = await Galaxy.findAll({
     include: [ Star ]
   })
-  res.status(200).json(galaxies)
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(galaxies)
+  }
+  res.render(`../views/galaxy/index.twig`, { galaxies })
 }
 
 const show = async (req, res) => {
   const galaxy = await Galaxy.findByPk(req.params.id)
-  res.status(200).json(galaxy)
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(galaxy)
+  }
+  res.render(`../views/galaxy/show.twig`, { galaxy })
 }
 
 const create = async (req, res) => {
-  console.log("galaxy", req.body)
-  const { name, size, description } = req.body
-  const galaxy = await Galaxy.create({ name, size, description })
-
-  res.status(200).json(galaxy)
+  // res.render('../views/galaxy/index.twig')
+  const galaxy = await Galaxy.create(req.body)
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(galaxy)
+  }
+  res.redirect(302, `/galaxies/${galaxy.id}`)
 }
 
 const update = async (req, res) => {
-  const { name, size, description, StarId } = req.body
-  const { id } = req.params
-  const galaxy = await Galaxy.update({ name, size, description, StarId }, {
-    where: { id }
-  })
-  res.status(200).json(galaxy)
+  const galaxy = await Galaxy.update(req.body, { where: { id: req.params.id } })
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(galaxy)
+  }
+  res.redirect(302, `/galaxies/${req.params.id}`)
 }
 
 const remove = async (req, res) => {
-  const { id } = req.params
+  const galaxy = await Galaxy.destroy({ where: { id: req.params.id } })
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(galaxy)
+  }
+  res.redirect(302, `/galaxies`)
+}
 
-  //force a delete even if there's associations still in place
-  await Galaxy.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-  
-  try {
-    const remove = await Galaxy.destroy({ where: { id } });
-    res.status(200).json({ remove });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  } finally {
-    await Galaxy.sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+const form = async (req, res) => {
+  // res.status(200).json(`Galaxy#form(:id)`)
+  if (`undefined` !== typeof req.params.id) {
+    const galaxy = await Galaxy.findByPk(req.params.id)
+    res.render(`../views/galaxy/_form.twig`, { galaxy })
+  } else {
+    res.render(`../views/galaxy/_form.twig`)
   }
 }
 
-module.exports = { index, show, create, update, remove }
+module.exports = { index, show, create, update, remove, form }

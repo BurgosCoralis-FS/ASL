@@ -1,0 +1,35 @@
+{% extends "layouts/_default.twig" %}
+
+{% block pageName %}{{ planet.name }}{% endblock %}
+
+{% block main_content %}
+    <div class='bg'>
+        <div class='content'>
+                <div class='column'>
+                    <div class='top'>
+                        <a href="/planets/{{ planet.id }}">
+                            <img src='/images/pngwing.com(1).png' alt="planet">
+                        </a>
+                    </div>
+
+                    <div class='middle'>
+                        <h1>
+                            <a href="/planets{{ planet.id }}">{{ planet.name }}</a>
+                        </h1>
+                    </div>
+
+                    <div class='bottom'>
+                        <p>{{ planet.size }}</p>
+                        <p>{{ planet.description }}</p>
+                        <ul>
+                            <li>
+                                <a href="/planets/">&lt;&lt; Go Back</a> <br />
+                                <a href="/planets/{{ planet.id }}/edit">Edit</a>             
+                                <a href="/planets/{{ planet.id }}/delete">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "layouts/_default.twig" %}
+
+{% block pageName %}{% if planet is defined %}Update{% else %}Create{% endif %}  Planet{% endblock %}
+
+{% block main_content %}
+    <div class="bg">
+        <div class="content">
+            <div class="form-column">
+                {% if planet is defined %}
+                    <form action="/planets/{{ planet.id }}" method="POST">
+        
+                    <input type="hidden" name="id" value="{{ planet.id }}">
+                {% else %}
+                    <form action="/planets" method="POST">
+                {% endif %}
+                    <h3>{% if planet is defined %}Update{% else %}Create{% endif %}  Planet</h3>
+                    <div class="control">
+                        <label>Name:</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            {% if planet is defined %}
+                            value="{{ planet.name }}"
+                            {% endif %}
+                        />
+                    </div>
+
+                    <div class="control">
+                        <label>Size:</label>
+                        <input 
+                            type="text" 
+                            name="size" 
+                            {% if planet is defined %}
+                            value="{{ planet.size }}"
+                            {% endif %}
+                        />
+                    </div>
+
+                    <div class="control">
+                        <label>Description:</label>
+                        <textarea name="description" rows='10'>{{ planet.description }}</textarea>
+                    </div>
+
+                    <div class="control">
+                        <button type="submit">
+                            {% if planet is defined %}Update{% else %}Create{% endif %}  Planet
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

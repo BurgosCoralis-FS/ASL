@@ -1,0 +1,54 @@
+{% extends "layouts/_default.twig" %}
+
+{% block pageName %}{% if star is defined %}Update{% else %}Create{% endif %}  Star{% endblock %}
+
+{% block main_content %}
+    <div class="bg">
+        <div class="content">
+            <div class="form-column">
+                {% if star is defined %}
+                    <form action="/stars/{{ star.id }}" method="POST">
+        
+                    <input type="hidden" name="id" value="{{ star.id }}">
+                {% else %}
+                    <form action="/stars" method="POST">
+                {% endif %}
+                    <h3>{% if star is defined %}Update{% else %}Create{% endif %}  Star</h3>
+                    <div class="control">
+                        <label>Name:</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            {% if star is defined %}
+                            value="{{ star.name }}"
+                            {% endif %}
+                        />
+                    </div>
+
+                    <div class="control">
+                        <label>Size:</label>
+                        <input 
+                            type="text" 
+                            name="size" 
+                            {% if star is defined %}
+                            value="{{ star.size }}"
+                            {% endif %}
+                        />
+                    </div>
+
+                    <div class="control">
+                        <label>Description:</label>
+                        <textarea name="description" rows='10'>{{ star.description }}</textarea>
+                    </div>
+
+                    <div class="control">
+                        <button type="submit">
+                            {% if star is defined %}Update{% else %}Create{% endif %}  Star
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

@@ -7,6 +7,12 @@ const galaxyCtlr = require(`../controllers/galaxy.js`)
 // Create a new Router instance and call it "router"
 const router = new express.Router()
 
+//HTML5 routes
+router.get(`/new`, galaxyCtlr.form)
+router.get(`/:id/edit`, galaxyCtlr.form)
+router.get(`/:id/delete`, galaxyCtlr.remove)
+router.post(`/:id`, galaxyCtlr.update)
+
 router.get(`/`, galaxyCtlr.index)         // show all galaxys
 router.post(`/`, galaxyCtlr.create)       // create galaxy
 router.get(`/:id`, galaxyCtlr.show)       // show galaxy

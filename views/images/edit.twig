@@ -1,0 +1,7 @@
+<h1>Edit {{ image.name }}</h1>
+
+{% block pageName %}Edit {{ image.id }}{% endblock %}
+
+{% block main_content %}
+    {% include "views/images/_form.twig" with { "image": image }%}
+{% endblock %}

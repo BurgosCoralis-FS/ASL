@@ -4,9 +4,11 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('StarsPlanets', {
       StarId: {
+        allowNull: true,
         type: Sequelize.INTEGER
       },
       PlanetId: {
+        allowNull: true,
         type: Sequelize.INTEGER
       }
     });

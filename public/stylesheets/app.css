@@ -1,0 +1,199 @@
+/* home */
+body {
+    font-family: monospace;
+    background: #fff;
+    margin: 0
+}
+
+nav {
+    margin-top: 0;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+    height: 10vh;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 5px 5px #1c1c1c}
+
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 3vh;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #fff;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
+.bg {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), 
+                url(https://starwalk.space/gallery/images/what-is-space/1920x1080.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 90%;
+    height: 70%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column {
+    margin: 10px;
+    width: 28%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0.8;
+    transition: 0.3s ease;
+}
+
+.column:hover {
+    width: 30%;
+    height: 100%;
+}
+
+.column .top {
+    width: 100%;
+    height: 60%;
+    background: #2c3e50;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column .top a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.column .top a img{
+    width: 80%;
+}
+
+.column .middle {
+    width: 100%;
+    height: 10%;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.middle a {
+    text-decoration: none;
+    color: #232323
+}
+
+.column .bottom {
+    width: 100%;
+    height: 30%;
+    background: #bdc3c7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.column .bottom p {
+    width: 70%;
+    height: auto;
+    text-align: center;
+}
+
+.column .bottom ul li {
+    list-style: none;
+} 
+
+.column .bottom ul li a {
+    text-decoration: none;
+    color: #232323;
+    padding-top: 3vh;
+    text-align: center;
+}
+
+.column .bottom ul li a:hover {
+    text-decoration: underline;
+}
+
+.form-column {
+    background: #2c3e50;
+    margin: 10px;
+    width: 28%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0.8;
+    transition: 0.3s ease;
+}
+
+.form-column form {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    color: #fff;
+}
+
+.control {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vh;
+}
+
+.control img {
+    width: 80%;
+}
+
+.control button {
+    padding: 10px 50px;
+    background: #2980b9;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.control select {
+    padding: 5px 50px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.control #image {
+    margin-left: 15%;
+}
+
+.control button:hover {
+    padding: 11px 51px
+}
+
+input, textarea {
+    padding: 10px 100px;
+    margin-top: 2%;
+}

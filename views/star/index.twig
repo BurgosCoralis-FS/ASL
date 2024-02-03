@@ -1,0 +1,51 @@
+{% extends "layouts/_default.twig" %}
+
+{% block pageName %}View all stars{% endblock %}
+
+{% block main_content %}
+    <div class='bg'>
+        <div class='content'>
+            {% for star in stars %}
+                <div class='column'>
+                    <div class='top'>
+                        <a href="/stars/{{ star.id }}">
+                            <img src='/images/pngwing.com(2).png' alt="star">
+                        </a>
+                    </div>
+
+                    <div class='middle'>
+                        <h1>
+                            <a href="/stars{{ star.id }}">{{ star.name }}</a>
+                        </h1>
+                    </div>
+
+                    <div class='bottom'>
+                        <p> {{ star.description }}</p>
+                        <ul>
+                            <li>
+                                <a href="/stars/{{ star.id }}">Show</a> 
+                                <a href="/stars/{{ star.id }}/edit">Edit</a>             
+                                <a href="/stars/{{ galaxy.id }}/delete">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class='column'>
+                <div class='top'>
+                    <a href="/stars/new">
+                        <img src='/images/pngwing.com(2).png' alt="star">
+                    </a>
+                </div>
+
+                <div class='middle'>
+                    <h1>
+                        <a href="/stars/new">Create A New Star</a>
+                    </h1>
+                </div>
+
+                <div class='bottom'></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

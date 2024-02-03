@@ -1,0 +1,33 @@
+{% extends "layouts/_default.twig" %}
+
+{% block pageName %}{{ image.id }}{% endblock %}
+
+{% block main_content %}
+    <div class='bg'>
+        <div class='content'>
+        <div class='column'>
+                    <div class='top'>
+                        <a href="/images/{{ image.id }}">
+                            <img src="/images/{{ image.id }}{{ image.extension }}" alt="image">
+                        </a>
+                    </div>
+
+                    <div class='middle'>
+                        <h1>
+                            <a href="/images/{{ image.id }}">{{ image.Variant.title }}</a>
+                        </h1>
+                    </div>
+
+                    <div class='bottom'>
+                        <p> {{ image.description }}</p>
+                        <ul>
+                            <li>
+                                <a href="/images/">&lt;&lt; Go Back</a> <br />
+                                <a href="/images/{{ image.id }}/edit">Edit</a>             
+                                <a href="/images/{{ image.id }}/delete">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+        </div>
+    </div>
+{% endblock %}

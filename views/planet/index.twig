@@ -1,0 +1,52 @@
+{% extends "layouts/_default.twig" %}
+
+{% block pageName %}View all planets{% endblock %}
+
+{% block main_content %}
+    <div class='bg'>
+        <div class='content'>
+            {% for planet in planets %}
+                <div class='column'>
+                    <div class='top'>
+                        <a href="/planets/{{ planet.id }}">
+                            <img src='/images/pngwing.com(1).png' alt="planet">
+                        </a>
+                    </div>
+
+                    <div class='middle'>
+                        <h1>
+                            <a href="/planets{{ planet.id }}">{{ planet.name }}</a>
+                        </h1>
+                    </div>
+
+                    <div class='bottom'>
+                        <p>{{ planet.size }}</p>
+                        <p> {{ planet.description }}</p>
+                        <ul>
+                            <li>
+                                <a href="/planets/{{ planet.id }}">Show</a> 
+                                <a href="/planets/{{ planet.id }}/edit">Edit</a>             
+                                <a href="/planets/{{ planet.id }}/delete">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class='column'>
+                <div class='top'>
+                    <a href="/planets/new">
+                        <img src='/images/pngwing.com(1).png' alt="planet">
+                    </a>
+                </div>
+
+                <div class='middle'>
+                    <h1>
+                        <a href="/planets/new">Create A New Planet</a>
+                    </h1>
+                </div>
+
+                <div class='bottom'></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

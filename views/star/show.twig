@@ -1,0 +1,34 @@
+{% extends "layouts/_default.twig" %}
+
+{% block pageName %}{{ star.name }}{% endblock %}
+
+{% block main_content %}
+    <div class='bg'>
+        <div class='content'>
+                <div class='column'>
+                    <div class='top'>
+                        <a href="/stars/{{ star.id }}">
+                            <img src='/images/pngwing.com(2).png' alt="star">
+                        </a>
+                    </div>
+
+                    <div class='middle'>
+                        <h1>
+                            <a href="/stars{{ star.id }}">{{ star.name }}</a>
+                        </h1>
+                    </div>
+
+                    <div class='bottom'>
+                        <p>{{ star.description }} </p>
+                        <ul>
+                            <li>
+                                <a href="/stars/">&lt;&lt; Go Back</a> <br />
+                                <a href="/stars/{{ star.id }}/edit">Edit</a>             
+                                <a href="/stars/{{ star.id }}/delete">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,46 +1,56 @@
-const { Star, Galaxy, Planet } = require('../src/models')
+const { Star, Galaxy, Planet } = require('../models')
 
 const index = async (req, res) => {
   const stars = await Star.findAll({
-    include: [ Galaxy, Planet ]
+    include: [ Galaxy, Planet]
   })
-  res.status(200).json(stars)
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(stars)
+  }
+  res.render(`../views/star/index.twig`, { stars })
 }
 
 const show = async (req, res) => {
   const star = await Star.findByPk(req.params.id)
-  res.status(200).json(star)
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(star)
+  }
+  res.render(`../views/star/show.twig`, { star })
 }
 
 const create = async (req, res) => {
-  console.log('star', req.body)
-  const { name, size, description } = req.body
-  const star = await Star.create({ name, size, description })
-  res.status(200).json(star)
+  // res.render('../views/stars/index.twig')
+  const star = await Star.create(req.body)
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(star)
+  }
+  res.redirect(302, `/stars/${star.id}`)
 }
 
 const update = async (req, res) => {
-  const { id } = req.params
-  const { name, size, description, GalaxyId, PlanetId } = req.body
-  const star = await Star.update({ name, size, description, GalaxyId, PlanetId }, {
-    where: { id }
-  })
-  res.status(200).json(star)
+  const star = await Star.update(req.body, { where: {id: req.params.id } })
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(star)
+  }
+  res.redirect(302, `/stars/${req.params.id}`)
 }
 
 const remove = async (req, res) => {
-  const { id } = req.params
-  //force a delete even if there's associations still in place
-  await Star.sequelize.query('SET FOREIGN_KEY_CHECKS = 0');
-  
-  try {
-    const remove = await Star.destroy({ where: { id } });
-    res.status(200).json({ remove });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  } finally {
-    await Galaxy.sequelize.query('SET FOREIGN_KEY_CHECKS = 1');
+  const star = await Star.destroy({ where: { id: req.params.id } })
+  if (req.headers.accept.indexOf('/json') > -1){
+    return res.status(200).json(star)
+  }
+  res.redirect(302, `/stars`)
+}
+
+const form = async (req, res) => {
+  // res.status(200).json(`Star#form(:id)`)
+  if (`undefined` !== typeof req.params.id) {
+    const star = await Star.findByPk(req.params.id)
+    res.render(`../views/star/_form.twig`, { star })
+  } else {
+    res.render(`../views/star/_form.twig`)
   }
 }
 
-module.exports = { index, show, create, update, remove }
+module.exports = { index, show, create, update, remove, form }
